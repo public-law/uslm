@@ -4,7 +4,7 @@
 /* This CSS file adapts the original uslm.css selectors to work with */
 /* HTML div/span elements that have USLM CSS classes applied */
 
-@import url("uslm.css");
+/* Removed @import to avoid conflicting bold styles from original uslm.css */
 
 /* Root document elements - target CSS classes instead of element names */
 .bill, .resolution, .pLaw,
@@ -147,17 +147,38 @@
 
 .subparagraph {
     display: block;
-    margin: 0.5em 0 0.5em 2em;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
 }
 
 .clause {
     display: block;
-    margin: 0.5em 0 0.5em 3em;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
 }
 
 .subclause {
     display: block;
-    margin: 0.5em 0 0.5em 4em;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
+}
+
+/* Nested indentation - subparagraphs inside paragraphs */
+.paragraph .subparagraph {
+    margin-left: 2em; /* Indent subparagraphs relative to their parent paragraph */
+}
+
+/* Nested indentation - clauses inside subparagraphs */
+.subparagraph .clause {
+    margin-left: 2em; /* Indent clauses relative to their parent subparagraph */
+}
+
+/* Nested indentation - subclauses inside clauses */
+.clause .subclause {
+    margin-left: 2em; /* Indent subclauses relative to their parent clause */
 }
 
 /* Indentation classes */
@@ -182,8 +203,24 @@
 
 .heading {
     font-weight: bold;
-    display: inline;
+    display: block;
     text-transform: uppercase;
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+/* Title and chapter headings - center these specifically */
+.title > .heading, .chapter > .heading {
+    text-align: center;
+    display: block;
+    margin: 1em 0;
+}
+
+/* Section headings - left aligned */
+.section > .heading {
+    text-align: left;
+    display: inline;
+    margin: 0;
 }
 
 /* Hanging indent containers for numbered paragraphs */
@@ -201,6 +238,19 @@
     width: 1.3em;
     text-align: right;
     font-weight: bold;
+}
+
+/* Nested subparagraph numbers need different positioning */
+.paragraph .subparagraph .num {
+    left: -0.15em; /* Same as other hanging numbers, but relative to subparagraph container */
+}
+
+.paragraph .clause .num {
+    left: -0.15em; /* Same positioning for clauses */
+}
+
+.paragraph .subclause .num {
+    left: -0.15em; /* Same positioning for subclauses */
 }
 
 .paragraph .content, .paragraph .chapeau,
@@ -303,6 +353,33 @@
     padding-top: 2em;
 }
 
+/* Title and chapter structure */
+.title {
+    display: block;
+    margin: 2em 0;
+}
+
+.title > .num {
+    text-align: center;
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.chapter {
+    display: block;
+    margin: 2em 0 1em 0;
+}
+
+.chapter > .num {
+    text-align: center;
+    display: block;
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 1em 0 0.5em 0;
+}
+
 /* General typography improvements for HTML */
 body {
     font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
@@ -310,6 +387,17 @@ body {
     margin: 2em;
     max-width: 8.5in;
     background-color: white;
+    font-weight: normal; /* Ensure body text is not bold */
+}
+
+/* Reset font weights for content */
+.content, .chapeau, p, div {
+    font-weight: normal;
+}
+
+/* Only specific elements should be bold */
+.num, .heading, .shortTitle_act {
+    font-weight: bold;
 }
 
 /* Print styles */
