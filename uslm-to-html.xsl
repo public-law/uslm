@@ -184,9 +184,22 @@
     </xsl:template>
     
     <!-- ================================================================== -->
+    <!-- SPECIAL CASES                                                      -->
+    <!-- ================================================================== -->
+
+    <!-- Notes with role="annotations" - add ANNOTATIONS heading -->
+    <xsl:template match="uslm:notes[@role='annotations']">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+            <h4 class="annotations-heading">Annotations</h4>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+    <!-- ================================================================== -->
     <!-- DEFAULT TEMPLATE                                                   -->
     <!-- ================================================================== -->
-    
+
     <!-- Default template for any unmatched elements - treat as div -->
     <xsl:template match="*">
         <div>

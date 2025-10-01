@@ -6,6 +6,10 @@
 
 /* Removed @import to avoid conflicting bold styles from original uslm.css */
 
+
+
+
+
 /* Root document elements - target CSS classes instead of element names */
 .bill, .resolution, .pLaw,
 .statutesAtLarge, .statuteCompilation,
@@ -116,6 +120,12 @@
 }
 
 /* Sections and hierarchical structure */
+.annotations-heading {
+    text-align: center;
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
 .section {
     display: block;
     margin: 1.5em 0;
@@ -362,7 +372,7 @@
 .title > .num {
     text-align: center;
     display: block;
-    font-size: 16pt;
+    font-size: 18pt;
     font-weight: bold;
     margin: 1em 0;
 }
@@ -375,7 +385,7 @@
 .chapter > .num {
     text-align: center;
     display: block;
-    font-size: 14pt;
+    font-size: 16pt;
     font-weight: bold;
     margin: 1em 0 0.5em 0;
 }
