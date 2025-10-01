@@ -187,7 +187,7 @@
     <!-- SPECIAL CASES                                                      -->
     <!-- ================================================================== -->
 
-    <!-- Notes with role="annotations" - add ANNOTATIONS heading -->
+    <!-- Notes with role="annotations" - add Annotations heading -->
     <xsl:template match="uslm:notes[@role='annotations']">
         <div>
             <xsl:call-template name="process-attributes"/>

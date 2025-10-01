@@ -122,8 +122,6 @@
 /* Sections and hierarchical structure */
 .annotations-heading {
     text-align: center;
-    font-size: 1.2em;
-    text-decoration: underline;
 }
 
 .section {
@@ -214,7 +212,6 @@
 .heading {
     font-weight: bold;
     display: block;
-    text-transform: uppercase;
     text-align: center;
     margin: 0.5em 0;
 }
@@ -224,6 +221,23 @@
     text-align: center;
     display: block;
     margin: 1em 0;
+}
+
+/* Sizes for headings */
+.title > .heading {
+    font-size: 18pt;
+}
+.chapter > .heading {
+    font-size: 16pt;
+}
+.annotations-heading {
+    font-size: 15pt;
+}
+.editorialNote > .heading {
+    font-size: 13pt;
+    margin-top: 1.5em;
+    text-align: left;
+    text-decoration: underline;
 }
 
 /* Section headings - left aligned */
