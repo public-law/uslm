@@ -193,13 +193,21 @@
         <xsl:apply-templates select="uslm:sourceCredit"/>
 
         <!-- Then output the Annotations section with remaining content (only if content exists) -->
-        <xsl:if test="*[not(self::uslm:sourceCredit)]">
-            <div>
-                <xsl:call-template name="process-attributes"/>
-                <h4 class="annotations-heading">Annotations</h4>
-                <xsl:apply-templates select="*[not(self::uslm:sourceCredit)]"/>
-            </div>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="*[not(self::uslm:sourceCredit)]">
+                <div>
+                    <xsl:call-template name="process-attributes"/>
+                    <h4 class="annotations-heading">Annotations</h4>
+                    <xsl:apply-templates select="*[not(self::uslm:sourceCredit)]"/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <div>
+                    <xsl:call-template name="process-attributes"/>
+                    <h4 class="annotations-heading">(No annotations)</h4>
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- sourceCredit - add History heading -->
