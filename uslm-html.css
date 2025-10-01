@@ -233,11 +233,15 @@
 .annotations-heading {
     font-size: 15pt;
 }
-.editorialNote > .heading, .sourceCredit > .heading {
+.editorialNote > .heading {
     font-size: 13pt;
     margin-top: 1.5em;
     text-align: left;
     text-decoration: underline;
+}
+.sourceCredit > .heading {
+    margin-top: 1em;
+    text-align: left;
 }
 
 /* Section headings - left aligned */

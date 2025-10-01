@@ -189,10 +189,14 @@
 
     <!-- Notes with role="annotations" - add Annotations heading -->
     <xsl:template match="uslm:notes[@role='annotations']">
+        <!-- First, output any sourceCredit elements (History section) -->
+        <xsl:apply-templates select="uslm:sourceCredit"/>
+
+        <!-- Then output the Annotations section with remaining content -->
         <div>
             <xsl:call-template name="process-attributes"/>
             <h4 class="annotations-heading">Annotations</h4>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="*[not(self::uslm:sourceCredit)]"/>
         </div>
     </xsl:template>
 
