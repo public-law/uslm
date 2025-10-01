@@ -209,6 +209,15 @@
         </div>
     </xsl:template>
 
+    <!-- Section num - add colon after number -->
+    <xsl:template match="uslm:section/uslm:num">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+            <xsl:apply-templates/>
+            <xsl:text>:</xsl:text>
+        </div>
+    </xsl:template>
+
     <!-- ================================================================== -->
     <!-- DEFAULT TEMPLATE                                                   -->
     <!-- ================================================================== -->
