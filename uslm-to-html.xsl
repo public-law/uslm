@@ -218,6 +218,16 @@
         </div>
     </xsl:template>
 
+    <!-- Title and chapter heading - add typographical quotes -->
+    <xsl:template match="uslm:title/uslm:heading | uslm:chapter/uslm:heading">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+            <xsl:text>“</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>”</xsl:text>
+        </div>
+    </xsl:template>
+
     <!-- ================================================================== -->
     <!-- DEFAULT TEMPLATE                                                   -->
     <!-- ================================================================== -->
