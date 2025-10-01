@@ -412,7 +412,7 @@
 body {
     font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
     line-height: 1.4;
-    margin: 2em;
+    margin: 2em auto;
     max-width: 8.5in;
     background-color: white;
     font-weight: normal; /* Ensure body text is not bold */
