@@ -122,11 +122,12 @@
 /* Sections and hierarchical structure */
 .annotations-heading {
     text-align: center;
+    margin: 0 0 0.5em 0;
 }
 
 .section {
     display: block;
-    margin: 1.5em 0;
+    margin: 1.5em 0 3em 0;
 }
 
 .subsection {
@@ -216,11 +217,15 @@
     margin: 0.5em 0;
 }
 
+.editorialNote, .sourceCredit {
+    margin-bottom: 1.5em;
+}
+
 /* Title and chapter headings - center these specifically */
 .title > .heading, .chapter > .heading {
     text-align: center;
     display: block;
-    margin: 0em 0 1em 0;
+    margin: 0em 0 1.5em 0;
 }
 
 /* Sizes for headings */
@@ -235,13 +240,15 @@
 }
 .editorialNote > .heading {
     font-size: 13pt;
-    margin-top: 1.5em;
     text-align: left;
     text-decoration: underline;
 }
 .sourceCredit > .heading {
     margin-top: 1em;
     text-align: left;
+}
+.section > .num, .section > .heading {
+    font-size: 13pt;
 }
 
 /* Section headings - left aligned */
