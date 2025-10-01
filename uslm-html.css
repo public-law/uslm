@@ -242,6 +242,7 @@
     font-size: 13pt;
     text-align: left;
     text-decoration: underline;
+    margin-bottom: 0em;
 }
 .sourceCredit > .heading {
     margin-top: 1em;
@@ -309,7 +310,7 @@
     font-weight: bold;
     font-style: italic;
     display: block;
-    margin: 0.5em 0;
+    margin: 0.2em 0;
 }
 
 /* Content elements */
@@ -418,7 +419,7 @@
 /* General typography improvements for HTML */
 body {
     font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 2em auto;
     max-width: 8.5in;
     background-color: white;
@@ -433,6 +434,14 @@ body {
 /* Only specific elements should be bold */
 .num, .heading, .shortTitle_act {
     font-weight: bold;
+}
+
+.subheading {
+    margin-top: 1em;
+}
+
+.p_subsubheading {
+    margin-top: 0.5em;
 }
 
 /* Print styles */
