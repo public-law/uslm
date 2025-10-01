@@ -233,7 +233,7 @@
 .annotations-heading {
     font-size: 15pt;
 }
-.editorialNote > .heading {
+.editorialNote > .heading, .sourceCredit > .heading {
     font-size: 13pt;
     margin-top: 1.5em;
     text-align: left;

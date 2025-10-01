@@ -196,6 +196,15 @@
         </div>
     </xsl:template>
 
+    <!-- sourceCredit - add History heading -->
+    <xsl:template match="uslm:sourceCredit">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+            <div class="heading">History</div>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
     <!-- ================================================================== -->
     <!-- DEFAULT TEMPLATE                                                   -->
     <!-- ================================================================== -->
