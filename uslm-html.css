@@ -1,0 +1,459 @@
+@charset "UTF-8";
+
+/* USLM HTML Transformation CSS */
+/* This CSS file adapts the original uslm.css selectors to work with */
+/* HTML div/span elements that have USLM CSS classes applied */
+
+/* Removed @import to avoid conflicting bold styles from original uslm.css */
+
+
+
+
+
+/* Root document elements - target CSS classes instead of element names */
+.bill, .resolution, .pLaw,
+.statutesAtLarge, .statuteCompilation,
+.cfrDoc, .frDoc, .uscDoc, 
+.engrossedAmendment, .amendment {
+    font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
+    display: block;
+    margin: 1em;
+    font-size: 10pt;
+}
+
+/* For U.S. Code compatibility */
+.uscDoc {
+    max-width: 426pt;
+    margin-left: 24pt;
+    margin-right: 24pt;
+    font-size: 11pt;
+}
+
+.cfrDoc,
+.part[data-uslm-identifier*="/us/cfr"],
+.chapter[data-uslm-identifier*="/us/cfr"] {
+    display: block;
+    margin: 1em;
+    max-width: 35em;
+    font-size: 10pt;
+    font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
+}
+
+.frDoc {
+    display: block;
+    margin: 1em;
+    max-width: 58em;
+    font-size: 9pt;
+    font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
+}
+
+/* Hide metadata elements */
+.meta {
+    display: none;
+}
+
+.meta .docNumber, .meta .citableAs, .meta .docStage, .meta .currentChamber,
+.meta .processedBy, .meta .processedDate, .meta .congress, .meta .session,
+.meta .publicPrivate {
+    display: block;
+    font-size: 8pt;
+    color: #666;
+    margin: 0.2em 0;
+}
+
+/* Preface styling */
+.preface {
+    display: block;
+    text-align: center;
+    margin: 2em 0;
+    font-weight: bold;
+}
+
+.slugLine {
+    font-size: 8pt;
+    margin-bottom: 1em;
+}
+
+.congress, .session {
+    font-size: 12pt;
+    margin: 0.5em 0;
+}
+
+.docNumber {
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+.currentChamber {
+    font-size: 10pt;
+    margin: 1em 0;
+}
+
+/* Main content */
+.main {
+    display: block;
+    margin: 2em 0;
+}
+
+.longTitle {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.docTitle {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.officialTitle {
+    font-size: 12pt;
+    font-style: italic;
+    margin-bottom: 2em;
+}
+
+.enactingFormula {
+    font-style: italic;
+    margin: 1.5em 0;
+    text-align: justify;
+}
+
+/* Sections and hierarchical structure */
+.annotations-heading {
+    text-align: center;
+    margin: 1.2em 0 0 0;
+    font-weight: 400
+}
+
+.section {
+    display: block;
+    margin: 1.5em 0 4em 0;
+}
+
+.subsection {
+    display: block;
+    margin: 1em 0;
+    position: relative;
+}
+
+/* Hanging indent for subsection numbers too */
+.subsection .num {
+    position: absolute;
+    left: -0.15em;
+    width: 1.3em;
+    text-align: right;
+    font-weight: bold;
+}
+
+.subsection .heading, .subsection .chapeau {
+    margin-left: 1.7em;
+}
+
+.paragraph {
+    display: block;
+    margin: 0.5em 0 0.5em 1em;
+}
+
+.subparagraph {
+    display: block;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
+}
+
+.clause {
+    display: block;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
+}
+
+.subclause {
+    display: block;
+    margin: 0.5em 0;
+    position: relative;
+    /* No base margin-left - will be positioned relative to parent */
+}
+
+/* Nested indentation - subparagraphs inside paragraphs */
+.paragraph .subparagraph {
+    margin-left: 2em; /* Indent subparagraphs relative to their parent paragraph */
+}
+
+/* Nested indentation - clauses inside subparagraphs */
+.subparagraph .clause {
+    margin-left: 2em; /* Indent clauses relative to their parent subparagraph */
+}
+
+/* Nested indentation - subclauses inside clauses */
+.clause .subclause {
+    margin-left: 2em; /* Indent subclauses relative to their parent clause */
+}
+
+/* Indentation classes */
+.indent0 { margin-left: 0em; }
+.indent1 { margin-left: 2em; }
+.indent2 { margin-left: 4em; }
+.indent3 { margin-left: 6em; }
+.indent4 { margin-left: 8em; }
+
+/* Block content */
+.block {
+    display: block;
+    margin: 0.5em 0;
+}
+
+/* Numbers and headings */
+.num {
+    font-weight: bold;
+    display: inline;
+    margin-right: 0.5em;
+}
+
+.heading {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+.editorialNote, .sourceCredit {
+    margin-bottom: 1.5em;
+}
+
+/* Title and chapter headings - center these specifically */
+.title > .heading, .chapter > .heading {
+    text-align: center;
+    display: block;
+    margin: 0em 0 1.5em 0;
+}
+
+/* Sizes for headings */
+.title > .heading {
+    font-size: 22pt;
+}
+.chapter > .heading {
+    font-size: 16pt;
+}
+.annotations-heading {
+    font-size: 14pt;
+}
+.section > .num, .section > .heading {
+    font-size: 14pt;
+}
+.editorialNote > .heading {
+    font-size: 12pt;
+    text-align: left;
+    text-decoration: underline;
+    margin-bottom: 0em;
+}
+.sourceCredit > .heading {
+    margin-top: 1em;
+    text-align: left;
+}
+
+/* Section headings - left aligned */
+.section > .heading {
+    text-align: left;
+    display: inline;
+    margin: 0;
+}
+
+/* Hanging indent containers for numbered paragraphs */
+.paragraph, .subparagraph, .clause, .subclause, .item, .subitem {
+    display: block;
+    margin: 0.5em 0;
+    position: relative;
+}
+
+/* Create hanging indent layout */
+.paragraph .num, .subparagraph .num, .clause .num, .subclause .num, 
+.item .num, .subitem .num {
+    position: absolute;
+    left: -0.15em;
+    width: 1.3em;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Nested subparagraph numbers need different positioning */
+.paragraph .subparagraph .num {
+    left: -0.15em; /* Same as other hanging numbers, but relative to subparagraph container */
+}
+
+.paragraph .clause .num {
+    left: -0.15em; /* Same positioning for clauses */
+}
+
+.paragraph .subclause .num {
+    left: -0.15em; /* Same positioning for subclauses */
+}
+
+.paragraph .content, .paragraph .chapeau,
+.subparagraph .content, .subparagraph .chapeau,
+.clause .content, .clause .chapeau,
+.subclause .content, .subclause .chapeau,
+.item .content, .item .chapeau,
+.subitem .content, .subitem .chapeau {
+    margin-left: 1.7em;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+/* Adjust indentation to accommodate hanging numbers */
+.indent1 { margin-left: 1em; }
+.indent2 { margin-left: 2em; }
+.indent3 { margin-left: 3em; }
+.indent4 { margin-left: 4em; }
+
+.subheading {
+    font-weight: bold;
+    font-style: italic;
+    display: block;
+    margin: 0.2em 0;
+}
+
+/* Content elements */
+.content {
+    display: block;
+    margin: 0.5em 0;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+.chapeau {
+    display: block;
+    margin: 0.5em 0;
+    text-align: justify;
+}
+
+/* Inline elements */
+.shortTitle_act {
+    font-weight: bold;
+}
+
+.i {
+    font-style: italic;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.smallCaps {
+    font-variant: small-caps;
+}
+
+/* References */
+.ref {
+    text-decoration: underline;
+    color: #0066cc;
+}
+
+/* Attestation and signatures */
+.attestation {
+    display: block;
+    margin: 3em 0 2em 0;
+    text-align: right;
+}
+
+.actionDescription {
+    font-style: italic;
+}
+
+.signatures {
+    display: block;
+    margin: 2em 0;
+    text-align: right;
+}
+
+.signature {
+    display: block;
+    margin: 1em 0;
+}
+
+.notation {
+    font-style: italic;
+}
+
+.role {
+    font-weight: bold;
+}
+
+/* Endorsement */
+.endorsement {
+    display: block;
+    margin: 3em 0;
+    text-align: center;
+    border-top: 1px solid #000;
+    padding-top: 2em;
+}
+
+/* Title and chapter structure */
+.title {
+    display: block;
+    margin: 2em 0;
+}
+
+.title > .num {
+    text-align: center;
+    display: block;
+    font-size: 22pt;
+    font-weight: bold;
+    margin: 1em 0 0.2em 0;
+}
+
+.chapter {
+    display: block;
+    margin: 2em 0 1em 0;
+}
+
+.chapter > .num {
+    text-align: center;
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 3em 0 0.2em 0;
+}
+
+/* General typography improvements for HTML */
+body {
+    font-family: "Century Schoolbook", "NewCenturySchlbk", "Times New Roman", serif;
+    line-height: 1.5;
+    margin: 2em auto;
+    max-width: 8.5in;
+    background-color: white;
+    font-weight: normal; /* Ensure body text is not bold */
+}
+
+/* Reset font weights for content */
+.content, .chapeau, p, div {
+    font-weight: normal;
+}
+
+/* Only specific elements should be bold */
+.num, .heading, .shortTitle_act {
+    font-weight: bold;
+}
+
+.subheading {
+    margin-top: 1em;
+}
+
+.p_subsubheading {
+    margin-top: 0.5em;
+}
+
+/* Print styles */
+@media print {
+    body {
+        margin: 1in;
+        font-size: 10pt;
+    }
+    
+    .meta {
+        display: none !important;
+    }
+}
+
