@@ -445,15 +445,107 @@ body {
     margin-top: 0.5em;
 }
 
+/* Table of Contents Styles */
+.document-toc, .title-toc, .chapter-toc {
+    display: block;
+    margin: 2em 0;
+    padding: 1.5em;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.toc-heading {
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1em 0;
+    color: #212529;
+}
+
+.title-toc .toc-heading {
+    font-size: 14pt;
+}
+
+.chapter-toc .toc-heading {
+    font-size: 12pt;
+}
+
+.toc-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-nested {
+    margin-left: 2em;
+    margin-top: 0.5em;
+}
+
+.toc-item {
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #0066cc;
+    display: block;
+}
+
+.toc-link:hover {
+    text-decoration: underline;
+    color: #004499;
+}
+
+/* When ToC entry is a span (no ID), make it look like regular text */
+span.toc-link {
+    color: #212529;
+    cursor: default;
+}
+
+span.toc-link:hover {
+    text-decoration: none;
+}
+
+.toc-num {
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.toc-heading-text {
+    font-weight: normal;
+}
+
+/* Nested ToC items styling */
+.toc-title {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.toc-chapter {
+    font-size: 10pt;
+}
+
+.toc-section {
+    font-size: 9pt;
+}
+
 /* Print styles */
 @media print {
     body {
         margin: 1in;
         font-size: 10pt;
     }
-    
+
     .meta {
         display: none !important;
+    }
+
+    /* Ensure ToCs print nicely */
+    .document-toc, .title-toc, .chapter-toc {
+        background-color: #f8f9fa;
+        page-break-inside: avoid;
     }
 }
 

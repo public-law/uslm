@@ -91,18 +91,92 @@
     <!-- ================================================================== -->
     
     <!-- Document structure elements -->
-    <xsl:template match="uslm:bill | uslm:resolution | uslm:pLaw | uslm:statutesAtLarge | 
-                         uslm:statuteCompilation | uslm:cfrDoc | uslm:frDoc | uslm:uscDoc | 
-                         uslm:engrossedAmendment | uslm:amendment">
+    <xsl:template match="uslm:bill | uslm:resolution | uslm:pLaw | uslm:statutesAtLarge |
+                         uslm:statuteCompilation | uslm:cfrDoc | uslm:frDoc | uslm:uscDoc |
+                         uslm:engrossedAmendment | uslm:amendment | uslm:lawDoc">
         <div>
             <xsl:call-template name="process-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
     
-    <!-- Major sections -->
-    <xsl:template match="uslm:meta | uslm:preface | uslm:main | uslm:signatures | uslm:appendix | 
-                         uslm:section | uslm:subsection | uslm:paragraph | uslm:subparagraph | 
+    <!-- Main element - add document-wide ToC -->
+    <xsl:template match="uslm:main">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+
+            <!-- Generate document-wide table of contents -->
+            <xsl:if test=".//uslm:title | .//uslm:chapter | .//uslm:section[not(ancestor::uslm:title or ancestor::uslm:chapter)]">
+                <nav class="document-toc">
+                    <h2 class="toc-heading">Table of Contents</h2>
+                    <ul class="toc-list">
+                        <xsl:call-template name="generate-document-toc"/>
+                    </ul>
+                </nav>
+            </xsl:if>
+
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+    <!-- Title element - add chapter-level ToC -->
+    <xsl:template match="uslm:title">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+
+            <!-- Output title num and heading first -->
+            <xsl:apply-templates select="uslm:num | uslm:heading"/>
+
+            <!-- Generate table of contents for chapters under this title -->
+            <xsl:if test="uslm:chapter | uslm:section">
+                <nav class="title-toc">
+                    <h3 class="toc-heading">Chapters</h3>
+                    <ul class="toc-list">
+                        <!-- List all direct child chapters -->
+                        <xsl:for-each select="uslm:chapter">
+                            <xsl:call-template name="generate-toc-entry"/>
+                        </xsl:for-each>
+                        <!-- List any direct child sections (if not in chapters) -->
+                        <xsl:for-each select="uslm:section">
+                            <xsl:call-template name="generate-toc-entry"/>
+                        </xsl:for-each>
+                    </ul>
+                </nav>
+            </xsl:if>
+
+            <!-- Process remaining children -->
+            <xsl:apply-templates select="*[not(self::uslm:num or self::uslm:heading)]"/>
+        </div>
+    </xsl:template>
+
+    <!-- Chapter element - add section-level ToC -->
+    <xsl:template match="uslm:chapter">
+        <div>
+            <xsl:call-template name="process-attributes"/>
+
+            <!-- Output chapter num and heading first -->
+            <xsl:apply-templates select="uslm:num | uslm:heading"/>
+
+            <!-- Generate section-level table of contents -->
+            <xsl:if test="uslm:section">
+                <nav class="chapter-toc">
+                    <h4 class="toc-heading">Sections</h4>
+                    <ul class="toc-list">
+                        <xsl:for-each select="uslm:section">
+                            <xsl:call-template name="generate-toc-entry"/>
+                        </xsl:for-each>
+                    </ul>
+                </nav>
+            </xsl:if>
+
+            <!-- Process remaining children -->
+            <xsl:apply-templates select="*[not(self::uslm:num or self::uslm:heading)]"/>
+        </div>
+    </xsl:template>
+
+    <!-- Other major sections -->
+    <xsl:template match="uslm:meta | uslm:preface | uslm:signatures | uslm:appendix |
+                         uslm:section | uslm:subsection | uslm:paragraph | uslm:subparagraph |
                          uslm:clause | uslm:subclause | uslm:item | uslm:subitem | uslm:level |
                          uslm:chapeau | uslm:longTitle | uslm:enactingFormula | uslm:attestation |
                          uslm:endorsement">
@@ -183,6 +257,93 @@
         </xsl:for-each>
     </xsl:template>
     
+    <!-- ================================================================== -->
+    <!-- TABLE OF CONTENTS GENERATION                                       -->
+    <!-- ================================================================== -->
+
+    <!-- Generate document-wide table of contents -->
+    <xsl:template name="generate-document-toc">
+        <!-- Process titles - show chapters as nested items -->
+        <xsl:for-each select="uslm:title">
+            <li class="toc-item toc-title">
+                <xsl:call-template name="generate-toc-link"/>
+
+                <!-- Nested chapters within this title -->
+                <xsl:if test="uslm:chapter">
+                    <ul class="toc-list toc-nested">
+                        <xsl:for-each select="uslm:chapter">
+                            <li class="toc-item toc-chapter">
+                                <xsl:call-template name="generate-toc-link"/>
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+
+                <!-- Direct sections under title (not in chapters) -->
+                <xsl:if test="uslm:section[not(ancestor::uslm:chapter)]">
+                    <ul class="toc-list toc-nested">
+                        <xsl:for-each select="uslm:section[not(ancestor::uslm:chapter)]">
+                            <li class="toc-item toc-section">
+                                <xsl:call-template name="generate-toc-link"/>
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+            </li>
+        </xsl:for-each>
+
+        <!-- Process chapters not within titles (direct children of main) -->
+        <xsl:for-each select="uslm:chapter">
+            <li class="toc-item toc-chapter">
+                <xsl:call-template name="generate-toc-link"/>
+            </li>
+        </xsl:for-each>
+
+        <!-- Process top-level sections (direct children of main, not in titles or chapters) -->
+        <xsl:for-each select="uslm:section">
+            <li class="toc-item toc-section">
+                <xsl:call-template name="generate-toc-link"/>
+            </li>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- Generate a single ToC entry (called within for-each) -->
+    <xsl:template name="generate-toc-entry">
+        <li class="toc-item toc-{local-name()}">
+            <xsl:call-template name="generate-toc-link"/>
+        </li>
+    </xsl:template>
+
+    <!-- Generate ToC link with number and heading -->
+    <xsl:template name="generate-toc-link">
+        <xsl:choose>
+            <xsl:when test="@id">
+                <a href="#{@id}" class="toc-link">
+                    <xsl:call-template name="toc-text"/>
+                </a>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="toc-link">
+                    <xsl:call-template name="toc-text"/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Extract text for ToC entry -->
+    <xsl:template name="toc-text">
+        <xsl:if test="uslm:num">
+            <span class="toc-num">
+                <xsl:value-of select="uslm:num"/>
+            </span>
+        </xsl:if>
+        <xsl:if test="uslm:heading">
+            <span class="toc-heading-text">
+                <xsl:value-of select="uslm:heading"/>
+            </span>
+        </xsl:if>
+    </xsl:template>
+
     <!-- ================================================================== -->
     <!-- SPECIAL CASES                                                      -->
     <!-- ================================================================== -->
