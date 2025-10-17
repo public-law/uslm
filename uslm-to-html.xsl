@@ -100,21 +100,10 @@
         </div>
     </xsl:template>
     
-    <!-- Main element - add document-wide ToC -->
+    <!-- Main element -->
     <xsl:template match="uslm:main">
         <div>
             <xsl:call-template name="process-attributes"/>
-
-            <!-- Generate document-wide table of contents -->
-            <xsl:if test=".//uslm:title | .//uslm:chapter | .//uslm:section[not(ancestor::uslm:title or ancestor::uslm:chapter)]">
-                <nav class="document-toc">
-                    <h2 class="toc-heading">Table of Contents</h2>
-                    <ul class="toc-list">
-                        <xsl:call-template name="generate-document-toc"/>
-                    </ul>
-                </nav>
-            </xsl:if>
-
             <xsl:apply-templates/>
         </div>
     </xsl:template>
